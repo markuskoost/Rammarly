@@ -5,4 +5,5 @@
     <string name="sisselogimine">Sisselogimine</string>
     <string name="password">Password</string>
     <string name="e_mail">E-mail</string>
+    <string name="title_activity_add_marker">Map</string>
 </resources>
