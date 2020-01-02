@@ -1,16 +1,23 @@
 package com.example.rammarly
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.firestore.QuerySnapshot
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -23,6 +30,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,10 +71,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        FirebaseFirestore.getInstance().collection("Markers")
+            .get()
+            .addOnCompleteListener(object : OnCompleteListener<QuerySnapshot> {
+                override fun onComplete(@NonNull task: Task<QuerySnapshot>) {
+                    mMap = googleMap
+                    if (task.isSuccessful) {
+                        val location = LatLng(58.417, 22.500)
+                        val locations = CameraUpdateFactory.newLatLngZoom(location, 8F)
+                        mMap.animateCamera(locations)
 
-        val location = LatLng(58.417, 22.500)
-        val locations = CameraUpdateFactory.newLatLngZoom(location, 8F)
-        mMap.animateCamera(locations)
+                        for (document in task.getResult()!!) {
+
+                            val hashmap = document.data as HashMap
+                            val geopoint = GeoPoint(
+                                hashmap.get("latitude") as Double,
+                                hashmap.get("longitude") as Double
+                            )
+                            val options = MarkerOptions().position(
+                                LatLng(
+                                    geopoint.getLatitude(),
+                                    geopoint.getLongitude()
+                                )
+                            )
+                            mMap.addMarker(options)
+                        }
+                    } else {
+                        // handle errors here
+                    }
+                }
+            })
     }
 }

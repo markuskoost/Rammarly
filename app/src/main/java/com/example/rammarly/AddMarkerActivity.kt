@@ -51,7 +51,7 @@ class AddMarkerActivity : AppCompatActivity(), OnMapReadyCallback {
             googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
             googleMap.addMarker(markerOptions)
 
-            FirebaseFirestore.getInstance().collection("Markers").document(uid).set(latLng)
+            FirebaseFirestore.getInstance().collection("Markers").document().set(latLng)
         }
     }
 }
