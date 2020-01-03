@@ -32,28 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
-        android:text="@string/sisselogimine"
-        app:layout_constraintBottom_toTopOf="@+id/btn_createAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_createAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="142dp"
-        android:text="@string/registreerimine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ProgressBar
         android:id="@+id/progressbar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -70,10 +48,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+    <TextView
+        android:id="@+id/btn_passwordreset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="253dp" />
+        android:layout_marginStart="4dp"
+        android:clickable="true"
+        android:linksClickable="false"
+        android:longClickable="false"
+        android:text="Unustasin salasõna"
+        app:layout_constraintStart_toStartOf="@+id/btn_createAccount"
+        app:layout_constraintTop_toBottomOf="@+id/btn_createAccount" />
+
+    <Button
+        android:id="@+id/btn_createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="232dp"
+        android:text="@string/registreerimine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/sisselogimine"
+        app:layout_constraintBottom_toTopOf="@+id/btn_createAccount"
+        app:layout_constraintStart_toStartOf="@+id/btn_createAccount" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
