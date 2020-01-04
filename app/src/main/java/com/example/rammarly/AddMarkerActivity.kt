@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -21,6 +23,7 @@ class AddMarkerActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private val user = FirebaseAuth.getInstance().currentUser
     val uid = user!!.uid
+    var markerCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +50,22 @@ class AddMarkerActivity : AppCompatActivity(), OnMapReadyCallback {
         val locations = CameraUpdateFactory.newLatLngZoom(location, 8F)
         mMap.animateCamera(locations)
         mMap.setOnMapClickListener { latLng ->
-            val markerOptions = MarkerOptions()
-            markerOptions.position(latLng)
-           // markerOptions.title(latLng.latitude.toString() + " : " + latLng.longitude)
-            googleMap.clear()
-            googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-            googleMap.addMarker(markerOptions)
+            if (markerCount < 1) {
+                markerCount += 1
+                val markerOptions = MarkerOptions()
+                markerOptions.position(latLng)
+                // markerOptions.title(latLng.latitude.toString() + " : " + latLng.longitude)
+                googleMap.clear()
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                googleMap.addMarker(markerOptions)
 
-            FirebaseFirestore.getInstance().collection("Markers").document().set(latLng)
+                FirebaseFirestore.getInstance().collection("Markers").document().set(latLng)
+            } else {
+                Toast.makeText(
+                    applicationContext, "Ainult ühe markeri võib lisada",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
