@@ -7,15 +7,17 @@
     tools:context=".AddInfoActivity">
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="202dp"
-        android:layout_marginBottom="203dp"
+        android:id="@+id/et_peonimi"
+        android:layout_width="377dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="19dp"
         android:ems="10"
+        android:hint="Peo nimi"
         android:inputType="textPersonName"
-        android:hint="Kirjeldus"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_continue"
+        app:layout_constraintBottom_toTopOf="@+id/et_peoinfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,11 +26,28 @@
         android:id="@+id/btn_continue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="154dp"
-        android:layout_marginBottom="153dp"
-        android:text="Edasi"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="17dp"
+        android:text="Lisa peopaik"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_peoinfo" />
+
+    <EditText
+        android:id="@+id/et_peoinfo"
+        android:layout_width="374dp"
+        android:layout_height="176dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="269dp"
+        android:ems="10"
+        android:hint="Peo info"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textAlignment="gravity"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/btn_continue"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/et_peonimi" />
 </androidx.constraintlayout.widget.ConstraintLayout>
