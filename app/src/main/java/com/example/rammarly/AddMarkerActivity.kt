@@ -1,6 +1,9 @@
 package com.example.rammarly
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -53,5 +56,25 @@ class AddMarkerActivity : AppCompatActivity(), OnMapReadyCallback {
 
             FirebaseFirestore.getInstance().collection("Markers").document().set(latLng)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_add_marker, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here.
+        val id = item.getItemId()
+
+        if (id == R.id.check_icon) {
+            val intent = Intent(this@AddMarkerActivity, MapsActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+        }
+
+        return super.onOptionsItemSelected(item)
+
     }
 }
