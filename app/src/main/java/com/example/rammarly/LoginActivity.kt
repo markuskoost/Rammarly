@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.*
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -25,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private var btnLogin: Button? = null
     private var btnCreateAccount: Button? = null
     private var progressBar: ProgressBar? = null
+    private var btnReset: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         etPassword = findViewById<View>(R.id.et_password) as EditText
         btnLogin = findViewById<View>(R.id.btn_login) as Button
         btnCreateAccount = findViewById<View>(R.id.btn_createAccount) as Button
+        btnReset = findViewById<View>(R.id.btn_passwordreset) as TextView
         progressBar = findViewById<View>(R.id.progressbar) as ProgressBar
 
         btnCreateAccount!!
@@ -53,6 +56,17 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin!!
             .setOnClickListener { loginUser() }
+
+        btnReset!!.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                startActivity(
+                    Intent(
+                        this@LoginActivity,
+                        ForgotPasswordActivity::class.java
+                    )
+                )
+            }
+        })
     }
 
     private fun loginUser() {
