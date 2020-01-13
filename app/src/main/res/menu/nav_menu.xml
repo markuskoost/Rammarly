@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/nav_map"
+            android:title="Kaart"/>
+        <!--android:icon="@drawable/ic_profile"-->
+        <item
+            android:id="@+id/nav_info"
+            android:title="Info"/>
+    </group>
+
+
+    <item android:title="Kasutaja seaded">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="Seaded"/>
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Logi välja"/>
+        </menu>
+    </item>
+</menu>
